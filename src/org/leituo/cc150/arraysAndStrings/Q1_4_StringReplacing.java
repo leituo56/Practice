@@ -9,6 +9,7 @@ package org.leituo.cc150.arraysAndStrings;
  * Created by leituo56 on 10/26/14.
  */
 public class Q1_4_StringReplacing {
+    //O(n) time
     public void urlEncode(char[] content, int length){
         int newLength = length;
         for (int i = 0; i < length; i++) {
