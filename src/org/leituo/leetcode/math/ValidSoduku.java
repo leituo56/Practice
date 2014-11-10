@@ -36,9 +36,9 @@ public class ValidSoduku {
                     else
                         sqr[num] = 1;
                 }
-
             }
         }
         return true;
     }
+
 }
