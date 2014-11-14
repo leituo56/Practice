@@ -9,6 +9,7 @@ public class Tree {
     int key;
     Tree left;
     Tree right;
+    Tree parent;//just for q4.6
     boolean visited;
 
     Tree(int key) {
