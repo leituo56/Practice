@@ -10,7 +10,7 @@
 //        A solution set is:
 //        [7]
 //        [2, 2, 3]
-package org.leituo.leetcode.arraysM;
+package org.leituo.leetcode.backtracking;
 
 import java.util.*;
 
