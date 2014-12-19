@@ -4,7 +4,7 @@
 //        Would this affect the run-time complexity? How and why?
 //
 //        Write a function to determine if a given target is in the array.
-package org.leituo.leetcode.arraysM;
+package org.leituo.leetcode.binarySearch;
 
 /**
  * Created by leituo56 on 12/8/14.

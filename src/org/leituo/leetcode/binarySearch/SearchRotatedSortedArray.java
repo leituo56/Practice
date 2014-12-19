@@ -5,7 +5,7 @@
 //        You are given a target value to search. If found in the array return its index, otherwise return -1.
 //
 //        You may assume no duplicate exists in the array.
-package org.leituo.leetcode.arraysM;
+package org.leituo.leetcode.binarySearch;
 
 /**
  * Created by leituo56 on 12/8/14.

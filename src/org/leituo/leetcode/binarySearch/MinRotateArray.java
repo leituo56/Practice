@@ -5,7 +5,7 @@
 //        Find the minimum element.
 //
 //        You may assume no duplicate exists in the array.
-package org.leituo.leetcode.arraysM;
+package org.leituo.leetcode.binarySearch;
 
 /**
  * Created by leituo56 on 11/17/14.
