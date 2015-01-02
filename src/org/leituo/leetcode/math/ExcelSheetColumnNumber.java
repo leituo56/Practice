@@ -11,7 +11,7 @@
 //        Z -> 26
 //        AA -> 27
 //        AB -> 28
-        package org.leituo.leetcode.math;
+package org.leituo.leetcode.math;
 
 /**
  * Created by leituo56 on 1/1/15.
