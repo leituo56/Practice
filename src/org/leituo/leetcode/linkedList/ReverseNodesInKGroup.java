@@ -18,42 +18,48 @@ package org.leituo.leetcode.linkedList;
  * Created by leituo56 on 1/12/15.
  */
 public class ReverseNodesInKGroup {
-    public ListNode reverseKGroup(ListNode head, int k) {
-        ListNode helper = new ListNode(0);
-        ListNode end = helper;
-        ListNode temp = null;
-        ListNode runner = head;
-        boolean finished = false;
-        while(!finished){
-            ListNode tempEnd = runner;
-            for(int i = 0; i < k; i++){
-                if(runner==null){
-                    finished = true;
-                    break;
+    class Solution{
+        //Go through list, by k step each time
+        //reverse first k elem, and concatenate to prev end
+        //reverse last back if finished
+        public ListNode reverseKGroup(ListNode head, int k) {
+            ListNode helper = new ListNode(0);
+            ListNode end = helper;
+            ListNode temp = null;
+            ListNode runner = head;
+            boolean finished = false;
+            while(!finished){
+                ListNode tempEnd = runner;
+                for(int i = 0; i < k; i++){
+                    if(runner==null){
+                        finished = true;
+                        break;
+                    }
+                    ListNode next = runner.next;
+                    runner.next = temp;
+                    temp = runner;
+                    runner = next;
                 }
-                ListNode next = runner.next;
-                runner.next = temp;
-                temp = runner;
-                runner = next;
+                if(finished){
+                    end.next = reverse(temp);
+                }else{
+                    end.next = temp;
+                    end = tempEnd;
+                    temp = null;
+                }
             }
-            if(finished){
-                end.next = reverse(temp);
-            }else{
-                end.next = temp;
-                end = tempEnd;
-                temp = null;
+            return helper.next;
+        }
+        private ListNode reverse(ListNode head){
+            ListNode result = null;
+            while(head != null){
+                ListNode next= head.next;
+                head.next = result;
+                result = head;
+                head = next;
             }
+            return result;
         }
-        return helper.next;
     }
-    private ListNode reverse(ListNode head){
-        ListNode result = null;
-        while(head != null){
-            ListNode next= head.next;
-            head.next = result;
-            result = head;
-            head = next;
-        }
-        return result;
-    }
+
 }

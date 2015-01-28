@@ -9,23 +9,29 @@ package org.leituo.leetcode.linkedList;
  * Created by leituo56 on 1/7/15.
  */
 public class RemoveDupLinkedList2 {
-    public ListNode deleteDuplicates(ListNode head) {
-        ListNode helper = new ListNode(0);
-        helper.next = head;
-        ListNode prev = helper;
-        ListNode runner = head;
-        while(runner!=null){
-            if(runner.next!=null && runner.val == runner.next.val){
-                while(runner.next!=null && runner.val == runner.next.val){
+    class Solution{
+        //run over list
+        //if runner == runner.next, loop through until not equal, point prev.next to non equal
+        //else prev = runner
+        public ListNode deleteDuplicates(ListNode head) {
+            ListNode helper = new ListNode(0);
+            helper.next = head;
+            ListNode prev = helper;
+            ListNode runner = head;
+            while(runner!=null){
+                if(runner.next!=null && runner.val == runner.next.val){
+                    while(runner.next!=null && runner.val == runner.next.val){
+                        runner = runner.next;
+                    }
+                    prev.next = runner.next;
+                    runner = prev.next;
+                }else{
+                    prev = runner;
                     runner = runner.next;
                 }
-                prev.next = runner.next;
-                runner = prev.next;
-            }else{
-                prev = runner;
-                runner = runner.next;
             }
+            return helper.next;
         }
-        return helper.next;
     }
+
 }

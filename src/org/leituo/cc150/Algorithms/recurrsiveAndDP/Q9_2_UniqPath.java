@@ -11,6 +11,18 @@ package org.leituo.cc150.Algorithms.recurrsiveAndDP;
  * Created by leituo56 on 1/23/15.
  */
 public class Q9_2_UniqPath {
+    class Solution1{
+        public int uniqPath(int rowL, int colL){
+            int[] data = new int[colL];
+            data[0] = 1;
+            for(int row = 0; row < rowL; row++){
+                for(int col = 1; col < colL; col++){
+                    data[col] = data[col-1] + data[col];
+                }
+            }
+            return data[colL-1];
+        }
+    }
     class Solution{
         public int uniqPath(int rowL, int colL){
             int[][] data = new int[rowL][colL];

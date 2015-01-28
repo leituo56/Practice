@@ -18,38 +18,46 @@ public class CopyListWithRandomPointer {
      *     RandomListNode(int x) { this.label = x; }
      * };
      */
-    public RandomListNode copyRandomList(RandomListNode head) {
-        if(head==null)
-            return null;
-        Map<RandomListNode, RandomListNode> map = new HashMap<RandomListNode, RandomListNode>();
-        RandomListNode result = new RandomListNode(head.label);
-        map.put(head, result);
-        RandomListNode runner = head;
-        RandomListNode runner2 = result;
-        //copy next
-        while(runner.next!=null){
-            RandomListNode next = runner.next;
-            RandomListNode next2 = new RandomListNode(next.label);
-            map.put(next, next2);
-            runner2.next = next2;
+    class Solution{
+        //Use a hashmap to store Node->CopyedNode
+        //Copy the head and put it to hashmap
+        //Copy every next and put it to hashmap
+        //Go through again, and find the copied Node(from map) and point to it
+        public RandomListNode copyRandomList(RandomListNode head) {
+            if(head==null)
+                return null;
+            Map<RandomListNode, RandomListNode> map = new HashMap<RandomListNode, RandomListNode>();
+            RandomListNode result = new RandomListNode(head.label);
+            map.put(head, result);
 
-            runner = next;
-            runner2 = next2;
-        }
-        //copy random
-        runner = head;
-        runner2 = result;
-        while(runner!=null){
-            if(runner.random == null){
-                runner2.random = null;
-            }else{
-                runner2.random = map.get(runner.random);
+            RandomListNode runner = head;
+            RandomListNode runnerCopy = result;
+            //copy next
+            while(runner.next!=null){
+                RandomListNode next = runner.next;
+                RandomListNode nextCopy = new RandomListNode(next.label);
+                map.put(next, nextCopy);
+                runnerCopy.next = nextCopy;
+
+                runner = next;
+                runnerCopy = nextCopy;
             }
-            runner = runner.next;
-            runner2 = runner2.next;
+            //copy random
+            runner = head;
+            runnerCopy = result;
+            while(runner!=null){
+                if(runner.random == null){
+                    runnerCopy.random = null;
+                }else{
+                    runnerCopy.random = map.get(runner.random);
+                }
+                runner = runner.next;
+                runnerCopy = runnerCopy.next;
+            }
+            return result;
         }
-        return result;
     }
+
 
     class RandomListNode {
         int label;

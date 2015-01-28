@@ -23,58 +23,27 @@ package org.leituo.leetcode.linkedList;
  * Created by leituo56 on 1/2/15.
  */
 public class IntersectionOf2LinkedLists {
-    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        ListNode runnerA = headA;
-        ListNode runnerB = headB;
-        if(runnerA == null || runnerB == null)
-            return null;
-        while(runnerA!=null && runnerB!=null && runnerA!=runnerB){
-            runnerA = runnerA.next;
-            runnerB = runnerB.next;
-            if(runnerA==runnerB)
-                return runnerA;
-            if(runnerA == null)
-                runnerA = headB;
-            if(runnerB == null)
-                runnerB = headA;
-        }
-        return runnerA;
-    }
-
-    //Intuit
-    public ListNode getIntersectionNode2(ListNode headA, ListNode headB) {
-        ListNode runnerA = headA;
-        ListNode runnerB = headB;
-        int countA = 0;
-        int countB = 0;
-        while(runnerA!=null && runnerA.next!=null){
-            countA++;
-            runnerA = runnerA.next;
-        }
-        while(runnerB!=null && runnerB.next!=null){
-            countB++;
-            runnerB = runnerB.next;
-        }
-        if(runnerA!=runnerB){
-            return null;
-        }
-        runnerA = headA;
-        runnerB = headB;
-        if(countA > countB){
-            for(int i=0; i<countA - countB; i++){
+    class Solution{
+        // because lenA + lenB == lenB + lenA
+        // traverse A->B and B->A
+        // when they're same, return
+        // note that if there's no intersection, they will rich null at the same time
+        public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+            ListNode runnerA = headA;
+            ListNode runnerB = headB;
+            if(runnerA == null || runnerB == null)
+                return null;
+            while(runnerA!=null && runnerB!=null && runnerA!=runnerB){
                 runnerA = runnerA.next;
-            }
-        }else if(countA < countB){
-            for(int i=0; i<countB - countA; i++){
                 runnerB = runnerB.next;
+                if(runnerA==runnerB)
+                    return runnerA;
+                if(runnerA == null)
+                    runnerA = headB;
+                if(runnerB == null)
+                    runnerB = headA;
             }
+            return runnerA;
         }
-        while(runnerA!=null && runnerB!=null){
-            if(runnerA == runnerB)
-                return runnerA;
-            runnerA = runnerA.next;
-            runnerB = runnerB.next;
-        }
-        return null;
     }
 }
