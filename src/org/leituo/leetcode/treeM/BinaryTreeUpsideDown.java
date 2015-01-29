@@ -21,38 +21,49 @@ package org.leituo.leetcode.treeM;
  * Created by leituo56 on 12/18/14.
  */
 public class BinaryTreeUpsideDown {
-    public TreeNode UpsideDownBinaryTree2(TreeNode root) {
-        TreeNode cur = root;
-        TreeNode nextNodeLeft = null;
-        TreeNode nextNodeRight = null;
-        while(cur!=null){
-            TreeNode tmpL = cur.left;
-            TreeNode tmpR = cur.right;
+    class SolutionIt{
+        //traverse through left
+        //runner.left = prev right
+        //runner.right = prev runner
+        public TreeNode UpsideDownBinaryTree(TreeNode root) {
+            TreeNode cur = root;
+            TreeNode nextNodeLeft = null;
+            TreeNode nextNodeRight = null;
+            while(cur!=null){
+                TreeNode tmpL = cur.left;
+                TreeNode tmpR = cur.right;
 
-            cur.left = nextNodeLeft;
-            cur.right = nextNodeRight;
+                cur.left = nextNodeLeft;
+                cur.right = nextNodeRight;
 
-            nextNodeLeft = tmpR;
-            nextNodeRight = cur;
+                nextNodeLeft = tmpR;
+                nextNodeRight = cur;
 
-            cur = tmpL;
+                cur = tmpL;
+            }
+            return nextNodeRight;
         }
-        return nextNodeRight;
     }
 
-    public TreeNode UpsideDownBinaryTree(TreeNode root) {
-        if (root==null)
-            return null;
-        if(root.left==null)
-            return root;
-        TreeNode newNode = UpsideDownBinaryTree(root.left);
-        TreeNode temp = newNode;
-        while (temp.right!=null){
-            temp = temp.right;
+    class SolutionRec{
+        // stop when root or root.left==null
+        // upside down root.left
+        // put root and root.right to the most right of upsidedowned tree
+        public TreeNode UpsideDownBinaryTree(TreeNode root) {
+            if (root==null)
+                return null;
+            if(root.left==null)
+                return root;
+            TreeNode newNode = UpsideDownBinaryTree(root.left);
+            TreeNode temp = newNode;
+            while (temp.right!=null){
+                temp = temp.right;
+            }
+            temp.right = root;
+            temp.left = root.right;
+            root.right = root.left = null;
+            return newNode;
         }
-        temp.right = root;
-        temp.left = root.right;
-        root.right = root.left = null;
-        return newNode;
     }
+
 }

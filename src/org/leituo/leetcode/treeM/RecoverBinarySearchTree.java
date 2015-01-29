@@ -10,28 +10,36 @@ package org.leituo.leetcode.treeM;
  * Created by leituo56 on 1/16/15.
  */
 public class RecoverBinarySearchTree {
-    TreeNode first;
-    TreeNode second;
-    TreeNode prev;
-    public void recoverTree(TreeNode root) {
-        traverse(root);
-        if(first!=null && second!=null){
-            int temp = first.val;
-            first.val = second.val;
-            second.val = temp;
-        }
-    }
-    private void traverse(TreeNode root){
-        if(root==null)
-            return;
-        traverse(root.left);
-        if(prev !=null && root.val < prev.val){
-            if(first == null){
-                first = prev;
+    class Solution{
+        //inorder
+        //track prev
+        //if cur < prev, means prev is misorder first, second try to give a val cur
+        //second will finally stop at the biggest elem less than first
+        //swap them
+        TreeNode first;
+        TreeNode second;
+        TreeNode prev;
+        public void recoverTree(TreeNode root) {
+            traverse(root);
+            if(first!=null && second!=null){
+                int temp = first.val;
+                first.val = second.val;
+                second.val = temp;
             }
-            second = root;
         }
-        prev = root;
-        traverse(root.right);
+        private void traverse(TreeNode root){
+            if(root==null)
+                return;
+            traverse(root.left);
+            if(prev !=null && root.val < prev.val){
+                if(first == null){
+                    first = prev;
+                }
+                second = root;
+            }
+            prev = root;
+            traverse(root.right);
+        }
     }
+
 }

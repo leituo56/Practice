@@ -17,15 +17,20 @@ package org.leituo.leetcode.tree;
  * Created by leituo56 on 11/6/14.
  */
 public class PathSum {
-    public boolean hasPathSum(TreeNode root, int sum) {
-        if(root==null){
-            return false;
-        }
-        if(root.val == sum && root.left==null && root.right==null){
-            return true;
-        }
-        int remain = sum - root.val;
+    class Solution{
+        //if root is the leaf && root.val==sum
+        //pathSum = pathSum(left, remains) || pathSum(right, remains)
+        public boolean hasPathSum(TreeNode root, int sum) {
+            if(root==null){
+                return false;
+            }
+            if(root.val == sum && root.left==null && root.right==null){
+                return true;
+            }
+            int remain = sum - root.val;
 
-        return hasPathSum(root.left, remain) || hasPathSum(root.right, remain);
+            return hasPathSum(root.left, remain) || hasPathSum(root.right, remain);
+        }
     }
+
 }

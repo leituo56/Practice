@@ -26,26 +26,30 @@ public class PathSum2 {
     //Iterative
 
 
-    //Recursive
-    public List<List<Integer>> pathSum(TreeNode root, int sum) {
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
-        if(root==null)
+    class SolutionRec{
+        //Recursive
+        //use remains, same idea as pathSum1
+        public List<List<Integer>> pathSum(TreeNode root, int sum) {
+            List<List<Integer>> result = new ArrayList<List<Integer>>();
+            if(root==null)
+                return result;
+            if(root.val==sum && root.left==null && root.right==null){
+                List<Integer> list = new ArrayList<Integer>();
+                list.add(root.val);
+                result.add(list);
+                return result;
+            }
+            int remain = sum - root.val;
+            for(List<Integer> list:pathSum(root.left, remain)){
+                list.add(0, root.val);
+                result.add(list);
+            }
+            for(List<Integer> list:pathSum(root.right, remain)){
+                list.add(0, root.val);
+                result.add(list);
+            }
             return result;
-        if(root.val==sum && root.left==null && root.right==null){
-            List<Integer> list = new ArrayList<Integer>();
-            list.add(root.val);
-            result.add(list);
-            return result;
         }
-        int remain = sum - root.val;
-        for(List<Integer> list:pathSum(root.left, remain)){
-            list.add(0, root.val);
-            result.add(list);
-        }
-        for(List<Integer> list:pathSum(root.right, remain)){
-            list.add(0, root.val);
-            result.add(list);
-        }
-        return result;
     }
+
 }

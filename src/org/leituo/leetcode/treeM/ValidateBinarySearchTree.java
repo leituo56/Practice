@@ -11,26 +11,29 @@ package org.leituo.leetcode.treeM;
  * Created by leituo56 on 1/7/15.
  */
 public class ValidateBinarySearchTree {
-    //inorder traversal
-    //if cur <= prev, then false
-    private TreeNode prev;
-    public boolean isValidBST(TreeNode root) {
-        this.prev = null;
-        return validateBST(root);
-    }
-    public boolean validateBST(TreeNode root){
-        if(root == null)
-            return true;
-        //traverse left
-        if(!validateBST(root.left))
-            return false;
+    class Solution{
+        //inorder traversal
+        //if cur <= prev, then false
+        private TreeNode prev;
+        public boolean isValidBST(TreeNode root) {
+            this.prev = null;
+            return validateBST(root);
+        }
+        public boolean validateBST(TreeNode root){
+            if(root == null)
+                return true;
+            //traverse left
+            if(!validateBST(root.left))
+                return false;
 
-        //compare current
-        if(prev != null && prev.val >= root.val)
-            return false;
-        prev = root;
+            //compare current
+            if(prev != null && prev.val >= root.val)
+                return false;
+            prev = root;
 
-        //traverse right
-        return validateBST(root.right);
+            //traverse right
+            return validateBST(root.right);
+        }
     }
+
 }

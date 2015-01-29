@@ -23,6 +23,9 @@ import java.util.List;
  */
 public class LevelOrder1 {
     public class Solution {
+        //use a queue
+        //add null as a delim
+        //use two while to achieve level by level
         public List<List<Integer>> levelOrder(TreeNode root) {
             List<TreeNode> queue = new LinkedList<TreeNode>();
 

@@ -11,6 +11,10 @@ import java.util.Stack;
  * Created by leituo56 on 1/2/15.
  */
 public class BSTIterator {
+    //near in order traversal
+    //memory o(h)
+    //init: push every left to stack
+    //next: pop(), and init its right
     private Stack<TreeNode> stack = new Stack<TreeNode>();
 
     public BSTIterator(TreeNode root) {

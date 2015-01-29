@@ -14,39 +14,22 @@ package org.leituo.leetcode.dp;
  * Created by leituo56 on 11/16/14.
  */
 public class UniqBST {
-    //Tuo's solution
-    public int numTrees(int n) {
-        if(n==1)
-            return 1;
-        int[] table = new int[n];
-        table[0] = 1;
-        for(int i=1;i<n;i++){
-            for(int j=i;j>=0;j--){
-                table[j] = tableSum(j+1, table);
+    class Solution{
+        // numtree(n) could use 1..n as root
+        // for each root k, uniq number = numTree(left) * numTree(right)
+        // that is, numTree(k-1) * numTree(n-k)
+        public int numTrees(int n) {
+            if(n==1 || n==0)
+                return 1;
+            int[] data = new int[n+1];
+            data[0] = 1;
+            data[1] = 1;
+            for(int i=2;i<=n;i++){
+                for(int root = 1;root <= i; root++){
+                    data[i] += data[root-1] * data[i - root];
+                }
             }
+            return data[n];
         }
-        return tableSum(n, table);
-    }
-    public int tableSum(int num, int[] arr){
-        int sum = 0;
-        for(int i=0;i<num;i++){
-            sum += arr[i];
-        }
-        return sum;
-    }
-
-    //Optimized
-    public int numTrees2(int n) {
-        if(n==1 || n==0)
-            return 1;
-        int[] table = new int[n+1];
-        table[0] = 1;
-        table[1] = 1;
-        for(int i=2;i<=n;i++){
-            for(int j=0;j<i;j++){
-                table[i] += table[j] * table[i-j-1];
-            }
-        }
-        return table[n];
     }
 }

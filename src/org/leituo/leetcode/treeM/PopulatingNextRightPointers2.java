@@ -24,68 +24,39 @@ package org.leituo.leetcode.treeM;
  * Created by leituo56 on 12/8/14.
  */
 public class PopulatingNextRightPointers2 {
-    public void connect2(TreeLinkNode root){
-        TreeLinkNode down = root;
-        TreeLinkNode prev = null;
-        while (down!=null){
-            TreeLinkNode across = down;
-            TreeLinkNode head = null;
-            while (across!=null){
-                if (across.left!=null){
-                    if(prev!=null)
-                        prev.next = across.left;
-                    if(head==null)
-                        head = across.left;
-                    prev = across.left;
+    class Solution{
+        //down node level by level
+        //across node from left to right, connect the next level at the same time
+        //track prev to get last connect node
+        //track head for going down
+        //other stuff same as Populating Next Right Pointers1
+        public void connect(TreeLinkNode root){
+            TreeLinkNode down = root;
+            TreeLinkNode prev = null;
+            while (down!=null){
+                TreeLinkNode across = down;
+                TreeLinkNode head = null;
+                while (across!=null){
+                    if (across.left!=null){
+                        if(prev!=null)
+                            prev.next = across.left;
+                        if(head==null)
+                            head = across.left;
+                        prev = across.left;
+                    }
+                    if (across.right!=null){
+                        if(prev!=null)
+                            prev.next = across.right;
+                        if(head==null)
+                            head = across.right;
+                        prev = across.right;
+                    }
+                    across = across.next;
                 }
-                if (across.right!=null){
-                    if(prev!=null)
-                        prev.next = across.right;
-                    if(head==null)
-                        head = across.right;
-                    prev = across.right;
-                }
-                across = across.next;
+                prev = null;
+                down = head;
             }
-            prev = null;
-            down = head;
         }
     }
 
-    public void connect(TreeLinkNode root) {
-        TreeLinkNode down = root;
-        while(down!=null){
-            TreeLinkNode across = findNextAvailableParent(down);
-            while(across != null){
-                if(across.left!=null && across.right!=null){
-                    across.left.next = across.right;
-                }
-                if(across.left!=null && across.right==null){
-                    across.left.next = findNextAvailableChild(across.next);
-                }
-                if(across.right!=null){
-                    across.right.next = findNextAvailableChild(across.next);
-                }
-                across = findNextAvailableParent(across.next);
-            }
-            down = findNextAvailableChild(down);
-        }
-    }
-    private TreeLinkNode findNextAvailableParent(TreeLinkNode across){
-        while(across!=null){
-            if(across.left!=null || across.right!=null)
-                return across;
-            across = across.next;
-        }
-        return null;
-    }
-    private TreeLinkNode findNextAvailableChild(TreeLinkNode across){
-        across = findNextAvailableParent(across);
-        if (across==null)
-            return null;
-        else if(across.left!=null)
-            return across.left;
-        else
-            return across.right;
-    }
 }

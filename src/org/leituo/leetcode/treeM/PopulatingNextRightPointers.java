@@ -32,39 +32,25 @@ package org.leituo.leetcode.treeM;
  * Created by leituo56 on 11/9/14.
  */
 public class PopulatingNextRightPointers {
-    //Iterative
-    public void connect2(TreeLinkNode root) {
-        TreeLinkNode down = root;
-        while(down!=null){
-            TreeLinkNode across = down;
-            while(across!=null){
-                if(across.left != null && across.right !=null){
-                    across.left.next = across.right;
+    class Solution{
+        //Iterative
+        //go down level by level
+        //for each level, traverse right, connect left->right and right-> next.left
+        public void connect2(TreeLinkNode root) {
+            TreeLinkNode down = root;
+            while(down!=null){
+                TreeLinkNode across = down;
+                while(across!=null){
+                    if(across.left != null && across.right !=null){
+                        across.left.next = across.right;
+                    }
+                    if(across.right != null && across.next != null){
+                        across.right.next = across.next.left;
+                    }
+                    across = across.next;
                 }
-                if(across.right != null && across.next != null){
-                    across.right.next = across.next.left;
-                }
-                across = across.next;
+                down = down.left;
             }
-            down = down.left;
-        }
-    }
-    //RECURSIVE, using stack memory
-    public void connect(TreeLinkNode root) {
-        if(root==null)
-            return;
-        if(root.left!=null && root.right!=null){
-            root.left.next = root.right;//connect left, right
-            connectAdj(root.left, root.right);//connect adjacent
-            connect(root.left);
-            connect(root.right);
-        }
-    }
-    public void connectAdj(TreeLinkNode left, TreeLinkNode right){
-        while(left.right!=null && right.left!=null) {
-            left.right.next = right.left;
-            left = left.right;
-            right = right.left;
         }
     }
 

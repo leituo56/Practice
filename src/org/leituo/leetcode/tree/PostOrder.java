@@ -21,36 +21,39 @@ import java.util.Stack;
  * Created by leituo56 on 12/8/14.
  */
 public class PostOrder {
-    //post order left, right, root. reverse it as root, right, left
-    public List<Integer> postorderTraversal(TreeNode root) {
-        List<Integer> list = new LinkedList<Integer>();
-        if(root==null)
+    class SolutionIt{
+        //post order left, right, root. reverse it as root, right, left
+        //so same as preorder
+        //use a stack
+        public List<Integer> postorderTraversal(TreeNode root) {
+            List<Integer> list = new LinkedList<Integer>();
+            if(root==null)
+                return list;
+            Stack<TreeNode> stack = new Stack<TreeNode>();
+            stack.push(root);
+            while (!stack.isEmpty()){
+                TreeNode current = stack.pop();
+                list.add(current.val);
+                if(current.left!=null)
+                    stack.push(current.left);
+                if(current.right!=null)
+                    stack.push(current.right);
+            }
+            Collections.reverse(list);
+
             return list;
-        Stack<TreeNode> stack = new Stack<TreeNode>();
-        stack.push(root);
-        while (!stack.isEmpty()){
-            TreeNode current = stack.pop();
-            list.add(current.val);
-            if(current.left!=null)
-                stack.push(current.left);
-            if(current.right!=null)
-                stack.push(current.right);
         }
-        Collections.reverse(list);
-
-        return list;
     }
 
-    public List<Integer> postorderTraversal2(TreeNode root) {
-        List<Integer> list = new LinkedList<Integer>();
-        postOrder(root, list);
-        return list;
-    }
-    private void postOrder(TreeNode root, List<Integer> list){
-        if(root==null)
-            return;
-        postOrder(root.left, list);
-        postOrder(root.right, list);
-        list.add(root.val);
+    class SolutionRec{
+        public List<Integer> postorderTraversal(TreeNode root) {
+            List<Integer> list = new LinkedList<Integer>();
+            if(root == null)
+                return list;
+            list.addAll(postorderTraversal(root.left));
+            list.addAll(postorderTraversal(root.right));
+            list.add(root.val);
+            return list;
+        }
     }
 }

@@ -8,17 +8,23 @@ package org.leituo.leetcode.tree;
  * Created by leituo56 on 11/6/14.
  */
 public class BalanceTree {
-    public boolean isBalanced(TreeNode root) {
-        int result = heightAndBalance(root);
-        return result!=-1;
+    class Solution{
+        //combine height and isBalance to a help method
+        // >=0 means height, -1 means unbalance
+        // unbalance when left unbalance || right unbalance || abs(hL - hR) > 1
+        public boolean isBalanced(TreeNode root) {
+            int result = heightAndBalance(root);
+            return result!=-1;
+        }
+        public int heightAndBalance(TreeNode root){
+            if(root == null)
+                return 0;
+            int left = heightAndBalance(root.left);
+            int right = heightAndBalance(root.right);
+            if(left==-1 || right==-1 ||Math.abs(left-right)>1)
+                return -1;
+            return Math.max(left, right) + 1;
+        }
     }
-    public int heightAndBalance(TreeNode root){
-        if(root == null)
-            return 0;
-        int left = heightAndBalance(root.left);
-        int right = heightAndBalance(root.right);
-        if(left==-1 || right==-1 ||Math.abs(left-right)>1)
-            return -1;
-        return Math.max(left, right) + 1;
-    }
+
 }

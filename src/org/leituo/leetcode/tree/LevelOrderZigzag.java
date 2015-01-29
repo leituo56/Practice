@@ -23,33 +23,39 @@ import java.util.List;
  * Created by leituo56 on 1/3/15.
  */
 public class LevelOrderZigzag {
-    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>> result = new LinkedList<List<Integer>>();
-        if(root == null)
-            return result;
-        List<TreeNode> queue = new LinkedList<TreeNode>();
-        int level = 0;
-        queue.add(root);
-        while(!queue.isEmpty()){
-            List<Integer> levelList = new LinkedList<Integer>();
-            queue.add(null);
+    class Solution{
+        //Same as level order1
+        //level to track odd or even
+        //add to left or right base on odd or even
+        public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+            List<List<Integer>> result = new LinkedList<List<Integer>>();
+            if(root == null)
+                return result;
+            List<TreeNode> queue = new LinkedList<TreeNode>();
+            int level = 0;
+            queue.add(root);
             while(!queue.isEmpty()){
-                TreeNode current = queue.remove(0);
-                if(current == null)
-                    break;
-                if(current.left!=null)
-                    queue.add(current.left);
-                if(current.right!=null)
-                    queue.add(current.right);
+                List<Integer> levelList = new LinkedList<Integer>();
+                queue.add(null);
+                while(!queue.isEmpty()){
+                    TreeNode current = queue.remove(0);
+                    if(current == null)
+                        break;
+                    if(current.left!=null)
+                        queue.add(current.left);
+                    if(current.right!=null)
+                        queue.add(current.right);
 
-                if(level % 2 == 0)//left to right
-                    levelList.add(current.val);
-                else//right to left
-                    levelList.add(0, current.val);
+                    if(level % 2 == 0)//left to right
+                        levelList.add(current.val);
+                    else//right to left
+                        levelList.add(0, current.val);
+                }
+                level++;
+                result.add(levelList);
             }
-            level++;
-            result.add(levelList);
+            return result;
         }
-        return result;
     }
+
 }

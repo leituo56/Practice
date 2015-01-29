@@ -23,31 +23,35 @@ import java.util.List;
  * Created by leituo56 on 11/6/14.
  */
 public class LevelOrder2 {
-    public List<List<Integer>> levelOrderBottom(TreeNode root) {
-        List<TreeNode> queue = new LinkedList<TreeNode>();
+    class Solution{
+        //same as levelorder1
+        public List<List<Integer>> levelOrderBottom(TreeNode root) {
+            List<TreeNode> queue = new LinkedList<TreeNode>();
 
-        List<List<Integer>> result = new LinkedList<List<Integer>>();
-        if(root == null)
-            return result;
-        queue.add(root);
-        while(!queue.isEmpty()){
-            List<Integer> numInLevel = new LinkedList<Integer>();
-            //for each elem in queue
-            queue.add(null);//delimiter
+            List<List<Integer>> result = new LinkedList<List<Integer>>();
+            if(root == null)
+                return result;
+            queue.add(root);
             while(!queue.isEmpty()){
-                TreeNode temp = queue.remove(0);
-                if(temp==null)
-                    break;
-                //  form a list
-                numInLevel.add(temp.val);
-                //  put children of elem back to queue
-                if(temp.left!=null)
-                    queue.add(temp.left);
-                if(temp.right!=null)
-                    queue.add(temp.right);
+                List<Integer> numInLevel = new LinkedList<Integer>();
+                //for each elem in queue
+                queue.add(null);//delimiter
+                while(!queue.isEmpty()){
+                    TreeNode temp = queue.remove(0);
+                    if(temp==null)
+                        break;
+                    //  form a list
+                    numInLevel.add(temp.val);
+                    //  put children of elem back to queue
+                    if(temp.left!=null)
+                        queue.add(temp.left);
+                    if(temp.right!=null)
+                        queue.add(temp.right);
+                }
+                result.add(0, numInLevel);
             }
-            result.add(0, numInLevel);
+            return result;
         }
-        return result;
     }
+
 }

@@ -6,11 +6,14 @@ package org.leituo.leetcode.tree;
 /**
  * Created by leituo56 on 11/3/14.
  */
-public class TreeHeight {
-    public int maxDepth(TreeNode root) {
-        if(root == null)
-            return 0;
-        return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+public class MaxDepth {
+    class Solution{
+        //brute force
+        public int maxDepth(TreeNode root) {
+            if(root == null)
+                return 0;
+            return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+        }
     }
 }
 /**
