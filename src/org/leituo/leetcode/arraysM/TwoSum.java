@@ -9,23 +9,30 @@
 package org.leituo.leetcode.arraysM;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by leituo56 on 11/1/14.
  */
 public class TwoSum {
-    public int[] twoSum(int[] numbers, int target) {
-        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
-        int[] result = new int[2];
-        for(int i=0;i<numbers.length;i++){
-            if(map.containsKey(target-numbers[i])){
-                result[0] = map.get(target-numbers[i]);
-                result[1] = i+1;
-                return result;
-            }else{
-                map.put(numbers[i], i+1);
+    class Solution{
+        //Use HashMap, O(n) time, O(n) space
+        //traverse numbers
+        //find target - num in map
+        //add cur to the map
+        public int[] twoSum(int[] numbers, int target) {
+            int[] result = new int[2];
+            Map<Integer, Integer> map = new HashMap<Integer, Integer>();//num, index
+            for(int i=0; i<numbers.length; i++){
+                if(map.containsKey(target - numbers[i])){
+                    result[0] = map.get(target - numbers[i]) + 1;
+                    result[1] = i + 1;
+                    return result;
+                }
+                map.put(numbers[i], i);
             }
+            return result;
         }
-        return result;
     }
+
 }

@@ -19,34 +19,40 @@ import java.util.List;
  * Created by leituo56 on 11/1/14.
  */
 public class ThreeSum {
-    public List<List<Integer>> threeSum(int[] num) {
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
-        Arrays.sort(num);//O(nLogN)
-        for(int i=0;i<num.length-2;i++){
-            if(i>0 && num[i-1]==num[i])
-                continue;
-            int j = i+1, k = num.length - 1;
-            while(j<k){
-                int sum = num[i] + num[j] + num[k];
-                if(sum<=0){
-                    if(sum==0){
-                        List<Integer> temp = new ArrayList<Integer>();
-                        temp.add(num[i]);
-                        temp.add(num[j]);
-                        temp.add(num[k]);
-                        result.add(temp);
+    class Solution{
+        //traverse each elem except 2 right most
+        //for each elem, do 2sum from its right till end(left->, <-right)
+        //skip when next elem is equal to current
+        public List<List<Integer>> threeSum(int[] num) {
+            List<List<Integer>> result = new ArrayList<List<Integer>>();
+            Arrays.sort(num);//O(nLogN)
+            for(int i=0;i<num.length-2;i++){
+                if(i>0 && num[i-1]==num[i])
+                    continue;
+                int left = i+1, right = num.length - 1;
+                while(left<right){
+                    int sum = num[i] + num[left] + num[right];
+                    if(sum<=0){
+                        if(sum==0){
+                            List<Integer> temp = new ArrayList<Integer>();
+                            temp.add(num[i]);
+                            temp.add(num[left]);
+                            temp.add(num[right]);
+                            result.add(temp);
+                        }
+                        left++;
+                        while(left<right && num[left]==num[left-1])
+                            left++;
+                    }else{
+                        right--;
+                        while(left<right && num[right]==num[right+1])
+                            right--;
                     }
-                    j++;
-                    while(j<k && num[j]==num[j-1])
-                        j++;
-                }else{
-                    k--;
-                    while(j<k && num[k]==num[k+1])
-                        k--;
                 }
             }
-        }
 
-        return result;
+            return result;
+        }
     }
+
 }

@@ -13,42 +13,40 @@ import java.util.Arrays;
  * Created by leituo56 on 11/1/14.
  */
 public class ThreeSumClosest {
-    public int threeSumClosest(int[] num, int target) {
-        int sum = 0, ans;
-        if(num.length<=3){
-            for(int i=0;i<num.length;i++){
-                sum += num[i];
-            }
-            return sum;
-        }
-        ans = num[0] + num[1] + num[2];
-        int[] temp = num.clone();
-        Arrays.sort(temp);//O(logN)
-        for(int i=0;i<temp.length;i++){
-            int j = i + 1;
-            int k = temp.length -1;
-            while(k>j){
-                sum = temp[i] + temp[j] + temp[k];
-                if(sum==target){
-                    return sum;
+    class Solution{
+        //same as 3 sum, sort, two pointers
+        //use result to track the best answer
+        //update when abs(result - target) > abs(sum - target)
+        public int threeSumClosest(int[] num, int target) {
+            int result = 0;
+            if(num.length<=3){
+                for (int elem : num) {
+                    result += elem;
                 }
-                if(sum>target){
-                    k--;
-                }else{
-                    j++;
-                }
-                if(Math.abs(sum-target) < Math.abs(ans-target)){
-                    ans = sum;
-                }//check if it's better
+                return result;
             }
+            result = num[0] + num[1] + num[2];
+            int[] temp = num.clone();
+            Arrays.sort(temp);//O(logN)
+            for(int i=0;i<temp.length - 2;i++){
+                int left = i + 1;
+                int right = temp.length -1;
+                while(right>left){
+                    int sum = temp[i] + temp[left] + temp[right];
+                    if(sum==target){
+                        return sum;
+                    }else if(sum>target){
+                        right--;
+                    }else{
+                        left++;
+                    }
+                    if(Math.abs(sum-target) < Math.abs(result-target)){
+                        result = sum;
+                    }//check if it's better
+                }
+            }
+            return result;
         }
-        return ans;
     }
 
-    public static void main(String[] args) {
-        ThreeSumClosest test = new ThreeSumClosest();
-        int[] src = {-3,-2,-5,3,-4};
-        int result = test.threeSumClosest(src, -1);
-        System.out.println(result);
-    }
 }

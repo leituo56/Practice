@@ -20,39 +20,46 @@ import java.util.List;
  * Created by leituo56 on 11/1/14.
  */
 public class FourSum {
-    public List<List<Integer>> fourSum(int[] num, int target) {
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
-        Arrays.sort(num);
-        for(int i=0;i<num.length-3;i++){
-            if(i>0 && num[i] == num[i-1])
-                continue;
-            for(int j=i+1;j<num.length-2;j++){
-                if(j>i+1 && num[j] == num[j-1] )
+    class Solution{
+        //Same as 3 Sum
+        //traverse for 2 layer
+        //then 2 pointers
+        //notice that skip the equals
+        public List<List<Integer>> fourSum(int[] num, int target) {
+            List<List<Integer>> result = new ArrayList<List<Integer>>();
+            Arrays.sort(num);
+            for(int i=0;i<num.length-3;i++){
+                if(i>0 && num[i] == num[i-1])
                     continue;
-                int p = j+1;
-                int q = num.length -1;
-                while(p<q){
-                    int sum = num[i] + num[j] + num[p] + num[q];
-                    if(sum <=target){
-                        if(sum==target){
-                            List<Integer> temp = new ArrayList<Integer>();
-                            temp.add(num[i]);
-                            temp.add(num[j]);
-                            temp.add(num[p]);
-                            temp.add(num[q]);
-                            result.add(temp);
+                for(int j=i+1;j<num.length-2;j++){
+                    if(j>i+1 && num[j] == num[j-1] )
+                        continue;
+                    int left = j+1;
+                    int right = num.length -1;
+                    while(left<right){
+                        int sum = num[i] + num[j] + num[left] + num[right];
+                        if(sum <=target){
+                            if(sum==target){
+                                List<Integer> temp = new ArrayList<Integer>();
+                                temp.add(num[i]);
+                                temp.add(num[j]);
+                                temp.add(num[left]);
+                                temp.add(num[right]);
+                                result.add(temp);
+                            }
+                            left++;
+                            while(left<right && num[left]==num[left-1])
+                                left++;
+                        }else{
+                            right--;
+                            while(left<right && num[right]==num[right+1])
+                                right--;
                         }
-                        p++;
-                        while(p<q && num[p]==num[p-1])
-                            p++;
-                    }else{
-                        q--;
-                        while(p<q && num[q]==num[q+1])
-                            q--;
                     }
                 }
             }
+            return result;
         }
-        return result;
     }
+
 }

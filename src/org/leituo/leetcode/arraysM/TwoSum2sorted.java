@@ -15,21 +15,27 @@ package org.leituo.leetcode.arraysM;
  * Created by leituo56 on 12/18/14.
  */
 public class TwoSum2sorted {
-    public int[] twoSum(int[] numbers, int target) {
-        int head = 0;
-        int tail = numbers.length - 1;
-        int[] result = new int[2];
-        while(head < tail){
-            if(numbers[head] + numbers[tail] > target){
-                tail--;
-            }else if(numbers[head] + numbers[tail] < target){
-                head++;
-            }else{
-                result[0] = head;
-                result[1] = tail;
-                return result;
+    class Solution{
+        //sorted array
+        //traverse from both end
+
+        public int[] twoSum(int[] numbers, int target) {
+            int head = 0;
+            int tail = numbers.length - 1;
+            int[] result = new int[2];
+            while(head < tail){
+                if(numbers[head] + numbers[tail] > target){
+                    tail--;
+                }else if(numbers[head] + numbers[tail] < target){
+                    head++;
+                }else{
+                    result[0] = head;
+                    result[1] = tail;
+                    return result;
+                }
             }
+            return result;
         }
-        return result;
     }
+
 }
