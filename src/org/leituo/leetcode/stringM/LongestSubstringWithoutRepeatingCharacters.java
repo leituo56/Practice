@@ -10,22 +10,26 @@ import java.util.Map;
  * Created by leituo56 on 1/6/15.
  */
 public class LongestSubstringWithoutRepeatingCharacters {
-    public int lengthOfLongestSubstring(String s) {
+    class Solution{
         //save index of last occurence of the char
         //max to track longest result by now
-        // always make [maxLeft ~ i], no duplicates
+        // always make [left ~ i], no duplicates
         //update max if pos(char) - lastTimePos(char) > max
-        Map<Character, Integer> map = new HashMap<Character, Integer>();
-        int max = 0;
-        int maxLeft = 0;
-        for(int i = 0; i<s.length(); i++){
-            char cur = s.charAt(i);
-            if(map.containsKey(cur) && map.get(cur) >= maxLeft){
-                maxLeft = map.get(cur) + 1;//update the posible left
+        public int lengthOfLongestSubstring(String s) {
+            Map<Character, Integer> map = new HashMap<Character, Integer>();
+            int max = 0;
+            int left = -1;//last non-repeating left index till now
+            for(int i=0; i<s.length(); i++){
+                char cur = s.charAt(i);
+                if(map.containsKey(cur)){
+                    if(map.get(cur) > left)
+                        left = map.get(cur);
+                }
+                max = Math.max(max, i - left);
+                map.put(cur, i);
             }
-            max = Math.max(max, i - maxLeft + 1);
-            map.put(cur, i);
+            return max;
         }
-        return max;
     }
+
 }

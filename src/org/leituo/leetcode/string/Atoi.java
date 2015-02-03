@@ -9,31 +9,32 @@ package org.leituo.leetcode.string;
  * Created by leituo56 on 11/6/14.
  */
 public class Atoi {
-    public int atoi(String str) {
-        int i=0;
-        int sign = 1;
-        int result = 0;
-        while(i<str.length() && str.charAt(i)==' ')
-            i++;
-        if(i<str.length() && (str.charAt(i)=='-'|| str.charAt(i)=='+')){
-            if(str.charAt(i) == '-')
-                sign = -1;
-            i++;
-        }
-        while(i<str.length() && str.charAt(i)>='0' && str.charAt(i)<='9'){
-            if (result >  Integer.MAX_VALUE / 10 || (result == Integer.MAX_VALUE / 10 && (str.charAt(i) - '0' > 7))) {
-                if (sign == 1) return Integer.MAX_VALUE;
-                else return Integer.MIN_VALUE;
+    class Solution{
+        //trim spaces
+        //get sign (-, +)
+        //for each cur char - '0', result *= 10, result + cur
+        //notice this might overflow
+        public int atoi(String str) {
+            int i=0;
+            int sign = 1;
+            int result = 0;
+            str = str.trim();//remove white space
+            if(i<str.length() && (str.charAt(i)=='-'|| str.charAt(i)=='+')){
+                if(str.charAt(i) == '-')
+                    sign = -1;
+                i++;
             }
-            result *= 10;
-            result = result + str.charAt(i) - '0';
-            i++;
+            while(i<str.length() && str.charAt(i)>='0' && str.charAt(i)<='9'){
+                if (result >  Integer.MAX_VALUE / 10
+                        || (result == Integer.MAX_VALUE / 10 && (str.charAt(i) - '0' > Integer.MAX_VALUE % 10))) {
+                    if (sign == 1) return Integer.MAX_VALUE;
+                    else return Integer.MIN_VALUE;
+                }
+                result *= 10;
+                result = result + str.charAt(i) - '0';
+                i++;
+            }
+            return sign * result;
         }
-        return sign * result;
-    }
-
-    public static void main(String[] args) {
-        Atoi test = new Atoi();
-        System.out.println(test.atoi("123"));
     }
 }

@@ -11,35 +11,24 @@ package org.leituo.leetcode.string;
  * Created by leituo56 on 11/7/14.
  */
 public class ZigZagConversion {
-    public String convert(String s, int nRows) {
-        if(nRows == 1)
-            return s;
-        StringBuffer buff = new StringBuffer();
-        for(int i=0;i<nRows;i++){
-            int j = i;
-            if(i==0 || i==nRows-1){
-                while(j<s.length()){
-                    buff.append(s.charAt(j));
-                    j += 2 * nRows - 2;
-                }
-            }else{
-                boolean flag = false;
-                while(j<s.length()){
-                    buff.append(s.charAt(j));
-                    if(flag){
-                        j += 2*i;
-                        flag = false;
-                    }else{
-                        j += 2 * (nRows - i - 1);
-                        flag = true;
-                    }
+    class Solution{
+        //interval is 2*nRows - 2;
+        //double loop, write row by row, i for rows, j for pair number of each row
+        //patterns goes by i, i+Interval, i+2*Interval if i is first and last line
+        //add an extra (Interval - i) + kInterval is they're in the middle
+        public String convert(String s, int nRows) {
+            if(nRows == 1)
+                return s;
+            StringBuilder buff = new StringBuilder();
+            int interval = nRows * 2 - 2;
+            for(int i = 0; i < nRows; i++){
+                for(int j = 0; i + j * interval < s.length(); j++){
+                    buff.append(s.charAt(i+j*interval));
+                    if(i!=0 && i!= nRows - 1 && (interval-i) + j*interval < s.length())
+                        buff.append(s.charAt((interval-i) + j*interval));
                 }
             }
+            return buff.toString();
         }
-        return buff.toString();
-    }
-
-    public static void main(String[] args) {
-
     }
 }
