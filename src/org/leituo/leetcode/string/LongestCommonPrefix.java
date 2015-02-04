@@ -5,35 +5,31 @@ package org.leituo.leetcode.string;
  * Created by leituo56 on 11/6/14.
  */
 public class LongestCommonPrefix {
-    public String longestCommonPrefix(String[] strs) {
-        if(strs.length < 1)
-            return "";
-        if(strs.length == 1)
-            return strs[0];
-        String temp = strs[0];
-        int index = temp.length() -1;
-        for(int i = 0; i < strs.length; i++){
-            if(strs[i].length()==0)
+    class Solution{
+        //brute force
+        //find the shortest str
+        //for each pos, find each row of strs[], make sure they're equal
+        //for every inner loop passed, add to result
+        public String longestCommonPrefix(String[] strs) {
+            if(strs.length < 1)
                 return "";
-            if(strs[i].length() < index + 1){
-                index = strs[i].length()-1;
-            }
-        }//get the shortest string right index
-        int sameIndex = 0;
-        while(sameIndex <= index){
-            for(int j = 1; j< strs.length;j++){
-                if(strs[j].charAt(sameIndex) != temp.charAt(sameIndex)){
-                    return temp.substring(0,sameIndex);
+            if(strs.length == 1)
+                return strs[0];
+            int shortest = Integer.MAX_VALUE;
+            for(String str:strs){
+                shortest = Math.min(shortest, str.length());
+            }//find the shortest string len
+            boolean stop = false;
+            StringBuilder result = new StringBuilder();
+            for(int i=0; i<shortest; i++){
+                for(int row=0; row<strs.length-1; row++){
+                    if(strs[row].charAt(i)!=strs[row+1].charAt(i))
+                        stop = true;
                 }
+                if(!stop)
+                    result.append(strs[0].charAt(i));
             }
-            sameIndex++;
+            return result.toString();
         }
-        return temp.substring(0,sameIndex);
-    }
-
-    public static void main(String[] args) {
-        LongestCommonPrefix test = new LongestCommonPrefix();
-        String[] strs = {"bbbc", "bbba"};
-        System.out.println(test.longestCommonPrefix(strs));
     }
 }

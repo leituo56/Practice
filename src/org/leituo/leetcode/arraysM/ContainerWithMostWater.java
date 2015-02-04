@@ -9,21 +9,28 @@ package org.leituo.leetcode.arraysM;
  * Created by leituo56 on 12/8/14.
  */
 public class ContainerWithMostWater {
-    public int maxArea(int[] height) {
-        int max = 0;
-        int left = 0;
-        int right = height.length - 1;
-        while(left < right){
-            max = Math.max(max, area(height, left, right));
-            if(height[left] < height[right]){
-                left++;
-            }else{
-                right--;
+    class Solution{
+        //two pointers from left most and right most
+        //calculate area, and greedy max, dump the short one and move more close to the center
+        //never keep the short one, because len is become less and less, the short one is the upper limit and never
+        // get better results
+        public int maxArea(int[] height) {
+            int max = 0;
+            int left = 0;
+            int right = height.length - 1;
+            while(left < right){
+                max = Math.max(max, area(height, left, right));
+                if(height[left] < height[right]){
+                    left++;
+                }else{
+                    right--;
+                }
             }
+            return max;
         }
-        return max;
+        private int area(int[] height, int left, int right){
+            return (right - left) * Math.min(height[left], height[right]);
+        }
     }
-    private int area(int[] height, int left, int right){
-        return (right - left) * Math.min(height[left], height[right]);
-    }
+
 }
