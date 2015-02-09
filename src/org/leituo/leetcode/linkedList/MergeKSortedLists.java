@@ -32,10 +32,7 @@ public class MergeKSortedLists {
                 }
                 end = end.next;
             }
-            if(one==null)
-                end.next = two;
-            else
-                end.next = one;
+            end.next = one==null?two:one;
             return helper.next;
         }
     }

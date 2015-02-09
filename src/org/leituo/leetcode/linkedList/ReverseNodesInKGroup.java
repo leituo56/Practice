@@ -18,6 +18,39 @@ package org.leituo.leetcode.linkedList;
  * Created by leituo56 on 1/12/15.
  */
 public class ReverseNodesInKGroup {
+    class SolutionRec{
+        //go through first k, if there is k.
+        //split
+        //reverse head
+        //cat(head, reverseKGroup(rest))
+        public ListNode reverseKGroup(ListNode head, int k) {
+            if(head==null || head.next==null)
+                return head;
+            ListNode runner = head;
+            for(int i=0; i<k-1 && runner!=null; i++){//go k-1 times
+                runner = runner.next;
+            }
+            if(runner==null) return head;
+            ListNode rest = runner.next;
+            runner.next = null;
+            ListNode tail = head;
+            head = reverse(head);
+            tail.next = reverseKGroup(rest, k);
+            return head;
+        }
+        private ListNode reverse(ListNode head){
+            ListNode result = null;
+            while(head != null){
+                ListNode next= head.next;
+                head.next = result;
+                result = head;
+                head = next;
+            }
+            return result;
+        }
+    }
+
+
     class Solution{
         //Go through list, by k step each time
         //reverse first k elem, and concatenate to prev end

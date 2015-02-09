@@ -12,27 +12,26 @@ import java.util.List;
  * Created by leituo56 on 12/8/14.
  */
 public class GenerateParentheses {
-    public List<String> generateParenthesis(int n) {
-        List<String> result = new LinkedList<String>();
-        addParenthesis(result, "", n, 0);
-        return result;
-    }
-    private void addParenthesis(List<String> list, String str, int left, int rightLeft){
-        if (left==0 && rightLeft==0){
-            list.add(str);
+    class Solution{
+        //recursive solution
+        //for each cases, either add ( or add )
+        //track isValid by the num of ( not added yet, and ) need to add to form a valid parentheses
+
+        public List<String> generateParenthesis(int n) {
+            List<String> result = new LinkedList<String>();
+            addParenthesis(result, "", n, 0);
+            return result;
         }
-        if(left>0)
-            addParenthesis(list, str+"(", left-1, rightLeft + 1);
-        if (rightLeft > 0){
-            addParenthesis(list, str+")", left, rightLeft - 1);
+        private void addParenthesis(List<String> result, String str, int leftNotAdded, int rightNeedAdded){
+            if (leftNotAdded==0 && rightNeedAdded==0){
+                result.add(str);
+            }
+            if(leftNotAdded>0)
+                addParenthesis(result, str+"(", leftNotAdded-1, rightNeedAdded + 1);
+            if (rightNeedAdded > 0){
+                addParenthesis(result, str+")", leftNotAdded, rightNeedAdded - 1);
+            }
         }
     }
 
-    public static void main(String[] args) {
-        GenerateParentheses test = new GenerateParentheses();
-        List<String> result = test.generateParenthesis(3);
-        for (String str:result){
-            System.out.println(str);
-        }
-    }
 }

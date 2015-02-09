@@ -9,6 +9,8 @@ public class Merge2SortedLists {
     class Solution{
         //helper
         //brute force
+        //merge the same len
+        //put the rest to the end
         public ListNode mergeTwoLists(ListNode one, ListNode two) {
             ListNode helper = new ListNode(0);
             ListNode end = helper;

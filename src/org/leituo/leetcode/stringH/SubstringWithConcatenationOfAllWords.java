@@ -15,6 +15,10 @@ import java.util.*;
  */
 public class SubstringWithConcatenationOfAllWords {
     class Solution{
+        //using hashmap to save <word, how many times it occur>
+        //for each index, try helper function
+        //in helper function, substring a part, find if it's in hashmap
+        //count the occurence, if it's equals, return
         public List<Integer> findSubstring(String S, String[] L) {
             if(S == null || L == null || L.length == 0)
                 return null;
@@ -42,18 +46,5 @@ public class SubstringWithConcatenationOfAllWords {
             }
             return counter.equals(map);
         }
-    }
-    public void test(){
-        Solution s = new Solution();
-        String[] L = {"a", "a"};
-        List<Integer> l = s.findSubstring("a", L);
-        for (int item:l){
-            System.out.println(item);
-        }
-    }
-
-    public static void main(String[] args) {
-        SubstringWithConcatenationOfAllWords test = new SubstringWithConcatenationOfAllWords();
-        test.test();
     }
 }

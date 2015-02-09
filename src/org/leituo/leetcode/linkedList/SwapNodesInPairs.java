@@ -7,6 +7,7 @@ public class SwapNodesInPairs {
     class Solution{
         //encapsulate swap prev, first, second
         //then brute force. start with helper
+        //jump 2 nodes each time
         public ListNode swapPairs(ListNode head) {
             ListNode helper = new ListNode(0);
             ListNode result = helper;
