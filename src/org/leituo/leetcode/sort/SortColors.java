@@ -4,7 +4,7 @@
 //
 //        Note:
 //        You are not suppose to use the library's sort function for this problem.
-package org.leituo.leetcode.arraysM;
+package org.leituo.leetcode.sort;
 
 import java.util.Arrays;
 

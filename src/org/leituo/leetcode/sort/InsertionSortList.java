@@ -1,5 +1,8 @@
 //Sort a linked list using insertion sort.
-package org.leituo.leetcode.linkedList;
+package org.leituo.leetcode.sort;
+
+
+import org.leituo.utils.ListNode;
 
 /**
  * Created by leituo56 on 11/9/14.

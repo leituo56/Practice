@@ -5,7 +5,7 @@
 //Return 0 if the array contains less than 2 elements.
 //
 //You may assume all elements in the array are non-negative integers and fit in the 32-bit signed integer range.
-package org.leituo.leetcode.others;
+package org.leituo.leetcode.sort;
 
 import java.util.ArrayList;
 import java.util.List;

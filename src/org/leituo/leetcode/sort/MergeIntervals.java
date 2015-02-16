@@ -3,7 +3,7 @@
 //For example,
 //Given [1,3],[2,6],[8,10],[15,18],
 //return [1,6],[8,10],[15,18]
-package org.leituo.leetcode.others;
+package org.leituo.leetcode.sort;
 
 import java.util.Collections;
 import java.util.Comparator;
