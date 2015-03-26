@@ -10,6 +10,7 @@ package org.leituo.leetcode.greedy;
  * Created by leituo56 on 3/24/15.
  */
 public class BuySellStock4 {
+    //买卖股票，最多交易K次，求最大利润
     class Solution {
         //dp[times][day]
         //max profit if sell today = max( [time-1, yesterday + buy yesterday sell today], [do nothing] )

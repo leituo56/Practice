@@ -9,7 +9,6 @@ package org.leituo.leetcode.bitManipulation;
  * Created by leituo56 on 3/23/15.
  */
 public class NumOf1Bits {
-    // you need to treat n as an unsigned value
     // 求一个uint32数2进制'1'的个数
     class Solution {
         //unsigned int has 32 bits

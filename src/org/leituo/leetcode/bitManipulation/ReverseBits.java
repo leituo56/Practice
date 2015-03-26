@@ -11,7 +11,6 @@ package org.leituo.leetcode.bitManipulation;
  * Created by leituo56 on 3/23/15.
  */
 public class ReverseBits {
-    // you need treat n as an unsigned value
     // 反转位
     class SolutionEasy {
         // copy bit from right to left, past from left to right

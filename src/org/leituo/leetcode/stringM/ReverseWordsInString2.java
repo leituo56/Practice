@@ -13,29 +13,28 @@ package org.leituo.leetcode.stringM;
  * Created by leituo56 on 2/2/15.
  */
 public class ReverseWordsInString2 {
+    // 反转单词, "I love SJSU" => "SJSU love I"
     class Solution{
+        // write a reverse helper method
+        // reverse each word, by find spaces
+        // reverse the whole string
         public void reverseWords(char[] s) {
-            if(s.length < 2)
-                return;
-            reverse(s, 0, s.length - 1);
+            if(s == null || s.length < 2) return;
+            int len = s.length;
             int left = 0;
-            int right = 0;
-            for(int i=0; i<s.length; i++){
-                if(s[i]==' '){
-                    right = i-1;
-                    reverse(s, left, right);
-                    left = i+1;
+            for(int i=0; i<len; i++){
+                if(i == len - 1 || s[i+1]==' '){
+                    reverse(s, left, i);
+                    left = i + 2;
                 }
             }
-            reverse(s, left, s.length-1);
+            reverse(s, 0, len - 1);
         }
-        private void reverse(char[] s, int left, int right){
-            while(left < right){
-                char temp = s[left];
-                s[left] = s[right];
-                s[right] = temp;
-                left++;
-                right--;
+        private void reverse(char[] s, int start, int end){
+            while(start < end){
+                char tmp = s[start];
+                s[start++] = s[end];
+                s[end--] = tmp;
             }
         }
     }

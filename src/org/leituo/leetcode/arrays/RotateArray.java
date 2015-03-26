@@ -10,6 +10,7 @@ package org.leituo.leetcode.arrays;
  * Created by leituo56 on 3/23/15.
  */
 public class RotateArray {
+    //旋转数组，把数组向右旋转K个INDEX
     class Solution {
         //brute force solution, move pointer to copyFrom Index
         //rotate will form several circles
