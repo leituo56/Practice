@@ -25,7 +25,13 @@ package org.leituo.leetcode.dpHard;
  * Created by leituo56 on 1/23/15.
  */
 public class DungeonGame {
+    //迷宫，每个房间加血或者掉血，求左上到右下需要的最少生命值
     class Solution{
+        //Think reverse
+        //extra memory to handle HP needed to finish dungeon
+        //loop reversely, last one need 1 HP,
+        //each room choose right or bottom, always choose the easy one(min)
+        //if cur HP needed is <=0, set to 1
         public int calculateMinimumHP(int[][] dungeon) {
             int rowL = dungeon.length;
             int colL = dungeon[0].length;
@@ -42,6 +48,27 @@ public class DungeonGame {
                 }
             }
             return hp[0][0];
+        }
+    }
+    class SolutionLessRAM {
+        //Same idea, use sliding window to use less memory
+        public int calculateMinimumHP(int[][] dungeon) {
+            if(dungeon == null || dungeon.length < 1 || dungeon[0].length < 1)
+                return 1;
+            int rows = dungeon.length;
+            int cols = dungeon[0].length;
+            int[] data = new int[cols + 1];//extra dummy, for easy if/else handling
+            for(int k = 0; k < cols - 1; k++)
+                data[k] = Integer.MAX_VALUE;//set wall
+            data[cols] = data[cols-1] = 1;//extra dummy
+            for(int i = rows - 1; i >= 0; i--){
+                for(int j = cols - 1; j >= 0; j--){
+                    int needHP = Math.min(data[j], data[j+1]) - dungeon[i][j];//always choose the easy path
+                    data[j] = needHP < 1 ? 1 : needHP;
+                }
+                data[cols] = Integer.MAX_VALUE;//set back wall
+            }
+            return data[0];
         }
     }
 }
