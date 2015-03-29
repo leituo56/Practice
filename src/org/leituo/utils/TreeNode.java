@@ -1,4 +1,4 @@
-package org.leituo.cheatsheet.dataStructure.Helper;
+package org.leituo.utils;
 
 
 import java.util.LinkedList;
