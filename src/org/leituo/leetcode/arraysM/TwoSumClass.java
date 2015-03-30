@@ -16,6 +16,11 @@ import java.util.Map;
  * Created by leituo56 on 1/1/15.
  */
 public class TwoSumClass {
+    // 2 SUM 的类版本，Map迭代，Map.Entry用法
+    // Map(number, occurrence) to store data
+    // add to map, and plus one occurrence
+    // for find, iterate map, and try to find the target
+    // notice if cur==target, occurrence need to > 1
     private HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
     public void add(int number) {
         if(map.containsKey(number))
@@ -34,12 +39,5 @@ public class TwoSumClass {
                 return true;
         }
         return false;
-    }
-
-    public static void main(String[] args) {
-        TwoSumClass test = new TwoSumClass();
-        test.add(0);
-        //test.add(1);
-        System.out.println(test.find(0));
     }
 }

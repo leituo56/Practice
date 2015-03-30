@@ -17,21 +17,20 @@ package org.leituo.leetcode.math;
  * Created by leituo56 on 1/1/15.
  */
 public class ExcelSheetColumnNumber {
-    public int titleToNumber(String s) {
-        int sum = 0;
-        char[] list = s.toCharArray();
-        for (char c:list){
-            int current = c - 'A';
-            if(current >= 26 || current < 0)
-                return 0;
-            sum *= 26;
-            sum += (current + 1);
+    //EXCEL 列名转数字，AA->27
+    class Solution {
+        //Think it as base 26
+        //add new char = prev * 26 + cur
+        //iterate from head to tail
+        public int titleToNumber(String s) {
+            int result = 0;
+            if(s == null || s.length() == 0)
+                return result;
+            for(int i=0; i<s.length(); i++){
+                int cur = s.charAt(i) - 'A' + 1;
+                result = result * 26 + cur;
+            }
+            return result;
         }
-        return sum;
-    }
-
-    public static void main(String[] args) {
-        ExcelSheetColumnNumber test = new ExcelSheetColumnNumber();
-        System.out.println(test.titleToNumber("AA"));
     }
 }

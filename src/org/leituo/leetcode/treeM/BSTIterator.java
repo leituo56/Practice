@@ -5,12 +5,15 @@
 //Note: next() and hasNext() should run in average O(1) time and uses O(h) memory, where h is the height of the tree.
 package org.leituo.leetcode.treeM;
 
+import org.leituo.utils.TreeNode;
+
 import java.util.Stack;
 
 /**
  * Created by leituo56 on 1/2/15.
  */
 public class BSTIterator {
+    //实现BST迭代器
     //near in order traversal
     //memory o(h)
     //init: push every left to stack

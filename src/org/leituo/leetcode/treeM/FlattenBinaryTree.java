@@ -22,6 +22,8 @@
 //        6
 package org.leituo.leetcode.treeM;
 
+import org.leituo.utils.TreeNode;
+
 /**
  * Created by leituo56 on 11/9/14.
  */
@@ -45,10 +47,4 @@ public class FlattenBinaryTree {
         }
     }
 
-}
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) { val = x; }
 }

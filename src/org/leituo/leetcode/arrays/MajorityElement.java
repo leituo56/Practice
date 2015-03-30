@@ -10,42 +10,48 @@ import java.util.Map;
  * Created by leituo56 on 1/1/15.
  */
 public class MajorityElement {
-    //Voting algorithm
-    public int majorityElement(int[] num) {
-        int count = 0;
-        int majNum = 0;
-        for(int elem:num){
-            if(count==0){
-                majNum = elem;
-                count = 1;
-            }else if(elem == majNum){
-                count++;
-            }else{
-                count--;
+    // 求过半元素， 考点:Voting algorithm || 位运算
+    class Solution {
+        // Voting algorithm
+        // since major elem have more occurrence than all else,
+        // use counter to trace, guess cur as major elem, and ++counter
+        // if cur != major, than --counter
+        // if counter is 0, than make a new guess
+        public int majorityElement(int[] num) {
+            int result = 0;
+            int counter = 0;
+            for(int elem:num){
+                if(counter == 0)
+                    result = elem;
+                if(elem == result)
+                    counter++;
+                else
+                    counter--;
             }
+            return result;
         }
-        return majNum;
     }
 
-    //Intuit
-    public int majorityElement2(int[] num) {
-        int maxTimes = 1;
-        int maxElem = num[0];
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-        for(int elem:num){
-            if(map.containsKey(elem)){
-                int times = map.get(elem);
-                if(++times > maxTimes){
-                    maxTimes = times;
-                    maxElem = elem;
+    class SolutionBit {
+        //Vote for every bit
+        //since maj elem will win every bit, so return the bit array result
+        //time complexity is 32n
+        public int majorityElement(int[] num) {
+            int[] bitVoting = new int[32];
+            for (int i = 0; i < 32; i++) {
+                for (int elem : num) {
+                    if (((elem >> i) & 1) > 0)
+                        bitVoting[i]++;
+                    else
+                        bitVoting[i]--;
                 }
-                map.put(elem, times);
-            }else{
-                map.put(elem, 1);
             }
-            if(maxTimes > num.length / 2)
-                return maxElem;
+            int result = 0;
+            for (int i = 0; i < 32; i++) {
+                if (bitVoting[i] > 0)
+                    result = result | (1 << i);
+            }
+            return result;
         }
-        return maxElem;
     }
 }
