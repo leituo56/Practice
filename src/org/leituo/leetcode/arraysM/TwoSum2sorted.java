@@ -15,10 +15,11 @@ package org.leituo.leetcode.arraysM;
  * Created by leituo56 on 12/18/14.
  */
 public class TwoSum2sorted {
+    // 2SUM 已排序版本
     class Solution{
         //sorted array
         //traverse from both end
-
+        //if <, left++, if >, right--
         public int[] twoSum(int[] numbers, int target) {
             int head = 0;
             int tail = numbers.length - 1;
