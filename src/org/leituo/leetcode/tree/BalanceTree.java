@@ -4,6 +4,8 @@
 // of every node never differ by more than 1.
 package org.leituo.leetcode.tree;
 
+import org.leituo.utils.TreeNode;
+
 /**
  * Created by leituo56 on 11/6/14.
  */

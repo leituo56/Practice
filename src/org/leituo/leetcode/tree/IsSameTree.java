@@ -3,6 +3,8 @@
 //Two binary trees are considered equal if they are structurally identical and the nodes have the same value.
 package org.leituo.leetcode.tree;
 
+import org.leituo.utils.TreeNode;
+
 /**
  * Created by leituo56 on 11/3/14.
  */

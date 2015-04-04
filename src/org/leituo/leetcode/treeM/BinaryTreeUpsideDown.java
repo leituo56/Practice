@@ -17,6 +17,8 @@
 //        3   1
 package org.leituo.leetcode.treeM;
 
+import org.leituo.utils.TreeNode;
+
 /**
  * Created by leituo56 on 12/18/14.
  */

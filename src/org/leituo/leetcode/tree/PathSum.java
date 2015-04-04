@@ -13,6 +13,8 @@
 //        return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
 package org.leituo.leetcode.tree;
 
+import org.leituo.utils.TreeNode;
+
 /**
  * Created by leituo56 on 11/6/14.
  */

@@ -7,6 +7,8 @@
 //Both the left and right subtrees must also be binary search trees.
 package org.leituo.leetcode.treeM;
 
+import org.leituo.utils.TreeNode;
+
 /**
  * Created by leituo56 on 1/7/15.
  */

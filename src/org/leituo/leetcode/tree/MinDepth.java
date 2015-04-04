@@ -3,6 +3,8 @@
 //The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
 package org.leituo.leetcode.tree;
 
+import org.leituo.utils.TreeNode;
+
 /**
  * Created by leituo56 on 11/6/14.
  */

@@ -6,6 +6,8 @@
 //A solution using O(n) space is pretty straight forward. Could you devise a constant space solution?
 package org.leituo.leetcode.treeM;
 
+import org.leituo.utils.TreeNode;
+
 /**
  * Created by leituo56 on 1/16/15.
  */

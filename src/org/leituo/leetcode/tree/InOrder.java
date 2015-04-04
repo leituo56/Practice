@@ -5,6 +5,8 @@
 //        Given binary tree {1,#,2,3},
 package org.leituo.leetcode.tree;
 
+import org.leituo.utils.TreeNode;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;

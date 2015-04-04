@@ -1,6 +1,8 @@
 //Given inorder and postorder traversal of a tree, construct the binary tree.
 package org.leituo.leetcode.treeM;
 
+import org.leituo.utils.TreeNode;
+
 /**
  * Created by leituo56 on 1/3/15.
  */

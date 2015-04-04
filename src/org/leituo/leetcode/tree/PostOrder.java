@@ -12,6 +12,8 @@
 //        Note: Recursive solution is trivial, could you do it iteratively?
 package org.leituo.leetcode.tree;
 
+import org.leituo.utils.TreeNode;
+
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
